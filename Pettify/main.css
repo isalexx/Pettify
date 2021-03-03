@@ -1,0 +1,52 @@
+html {
+    font-size: 10px; 
+    height: 100%; 
+   }
+   
+   body {
+       font-size: 1.8rem; 
+       box-sizing: border-box;
+       height: 100%;
+       display: flex; 
+       justify-content: center;
+       align-items: center;
+       background-color: #23272A;
+   }
+   
+   .container {
+       background-color: #e9e9e9; 
+       padding: 2rem; 
+   }
+   
+   h1 {
+       padding: 1.8rem 0; 
+       font-size: 4rem;
+   }
+   
+   /*form styles */
+   
+   .form-control {
+       font-size: 1.8rem; 
+       padding: 1.8rem 1rem; 
+       margin-top: 1.5rem;
+   }
+   
+   ::placeholder, 
+   input[type="submit"] {
+       font-size: 1.8rem;
+       padding-left: 1rem; 
+   }
+   
+   input[type="submit"] {
+       padding: 0 1.5rem;
+       border-radius: 0.5rem;
+   }
+   
+   /*table styles */
+   
+   table .btn,
+   .btn {
+       font-size: 1.8rem; 
+   }
+
+   
