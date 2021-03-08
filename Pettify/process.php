@@ -25,30 +25,45 @@
     //Set up a flag variable for debugging.
     $ok = true;
 
-    if ($age === false)
+    if (!(strlen($name) > 1) || !(strlen($type) > 1) || !(strlen($colour) > 1))
+    {
+        // This is the error message if the name, type, or colour of the animal is only 1 letter or less.
+        echo "<div class='divider'></div>";
+        echo "<section class='main-form-view'>";
+        echo "<div>";
+        echo "<h5 style='color: #af4644';> Please make sure the name, type, and colour are all at least 2 characters in length. </h5>";
+        echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="index.php" class="btn btn-outline-primary"> Back to Home </a>';
+        echo "<div class='divider'></div>";
+        echo "</div>";
+        echo "</section>";
+        $ok = false;
+    }
+
+    else if ($age === false)
     {
         // This is the error message if the age is not an int.
-        echo '<p> Please use a numeric value for the age. </p>';
-        echo '<a href="index.php" class="btn btn-primary"> Back to home </a>';
-        echo '<p></p>';
+        echo "<div class='divider'></div>";
+        echo "<section class='main-form-view'>";
+        echo "<div>";
+        echo "<h5 style='color: #af4644';> Please enter the pet's age as a number. </h5>";
+        echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="index.php" class="btn btn-outline-primary"> Back to Home </a>';
+        echo "<div class='divider'></div>";
+        echo "</div>";
+        echo "</section>";
         $ok = false;
     }
 
     else if ($gender != 'M' && $gender != 'F')
     {
         // This is the error message if the gender is not M or F.
-        echo '<p> Please make sure the gender is either male (M) or female (F). </p>';
-        echo '<a href="index.php" class="btn btn-primary"> Back to home </a>';
-        echo '<p></p>';
-        $ok = false;
-    }
-
-    else if (!(strlen($name) > 1) || !(strlen($type) > 1) || !(strlen($colour) > 1))
-    {
-        // This is the error message if the name, type, or colour of the animal is only 1 letter or less.
-        echo '<p> Please make sure the name, type, and colour of the animals are valid. Must be more then one letter in length. </p>';
-        echo '<a href="index.php" class="btn btn-primary"> Back to home </a>';
-        echo '<p></p>';
+        echo "<div class='divider'></div>";
+        echo "<section class='main-form-view'>";
+        echo "<div>";
+        echo "<h5 style='color: #af4644';> Please make sure the gender is either male (M) or female (F). </h5>";
+        echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="index.php" class="btn btn-outline-primary"> Back to Home </a>';
+        echo "<div class='divider'></div>";
+        echo "</div>";
+        echo "</section>";
         $ok = false;
     }
 
@@ -93,8 +108,15 @@
             //executeing the query
             $statement -> execute();
 
-            echo '<p> Success, your pet is in! </p>';
-            echo "<a href='view.php'> View All Pets </a>";
+            echo "<div class='divider'></div>";
+            echo "<section class='main-form-view'>";
+            echo "<div>";
+            echo "<h5 style='color: #009c22';> Success! </h5>";
+            echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="view.php" class="btn btn-outline-primary"> View All Pets </a>';
+            echo "<div class='divider'></div>";
+            echo "</div>";
+            echo "</section>";
+
 
             //closing DB Connection.
             $statement -> closeCursor();
