@@ -67,27 +67,27 @@ if(!empty($_GET['id']))
 
                     <div class="form-group">
                         <label for="name"> Name </label>
-                        <input type="text" name="name" id="name" class="form-control" value="<?php echo $name ?>">
+                        <input type="text" name="name" id="name" class="form-control" value="<?php echo $name ?>" required maxlength="25" minlength="2">
                     </div>
 
                     <div class="form-group">
                         <label for="type"> Type of Animal </label>
-                        <input type="text" name="type" id="type" class="form-control" value="<?php echo $type ?>">
+                        <input type="text" name="type" id="type" class="form-control" value="<?php echo $type ?>" required maxlength="15" minlength="2">
                     </div>
 
                     <div class="form-group">
                         <label for="age"> How old is your pet (Y)? </label>
-                        <input type="number" name="age" id="age" class="form-control" value="<?php echo $age ?>">
+                        <input type="number" name="age" id="age" class="form-control" value="<?php echo $age ?>" required maxlength="2" min="0" max="99" >
                     </div>
 
                     <div class="form-group">
                         <label for="gender"> Gender (F/M) </label>
-                        <input type="text" name="gender" id="gender" class="form-control" value="<?php echo $gender ?>">
+                        <input type="text" name="gender" id="gender" class="form-control" value="<?php echo $gender ?>" required maxlength="1">
                     </div>
 
                     <div class="form-group">
                         <label for="colour"> Colour </label>
-                        <input type="text" name="colour" id="colour" class="form-control" value="<?php echo $colour ?>">
+                        <input type="text" name="colour" id="colour" class="form-control" value="<?php echo $colour ?>" required maxlength="10" minlength="2">
                     </div>
 
                     <div style="text-align:center;">
