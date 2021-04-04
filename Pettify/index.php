@@ -23,7 +23,6 @@ if(!empty($_GET['id']))
     // prepare 
     $statement = $db -> prepare($sql);
 
-    
     //bind 
     $statement -> bindParam(':pet_id', $id); 
 
@@ -60,34 +59,60 @@ if(!empty($_GET['id']))
 
         <div class="divider"></div>
 
-        <section class="main-form">
+        <section class="main-form" style="height: 700px;">
             <div>
                 <form action="process.php" method="post">
                     <input type="hidden" name="pet_id" value="<?php echo $id ?>">
 
                     <div class="form-group">
                         <label for="name"> Name </label>
-                        <input type="text" name="name" id="name" class="form-control" value="<?php echo $name ?>">
+                        <input placeholder="My pet's name is..." type="text" name="name" id="name" class="form-control" value="<?php echo $name ?>" required maxlength="25" minlength="2">
                     </div>
 
                     <div class="form-group">
-                        <label for="type"> Type of Animal </label>
-                        <input type="text" name="type" id="type" class="form-control" value="<?php echo $type ?>">
+                        <label for="name"> Type of Pet </label>
+                        <select type="text" name="type" id="type" class="form-control">
+                            <option value="<?php echo $type ?? 'none'?>"> <?php echo $type ?? 'Please Choose One'?> </option>
+                            <option>Bunny</option>
+                            <option>Cat</option>
+                            <option>Dog</option>
+                            <option>Guinea Pig</option>
+                            <option>Turtle</option>
+                            <option>Snake</option>
+                            <option>Parrot</option>
+                            <option>Monkey</option>
+                            <option>Sugar Glider</option>
+                            <option>Other</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label for="age"> How old is your pet (Y)? </label>
-                        <input type="number" name="age" id="age" class="form-control" value="<?php echo $age ?>">
+                        <input placeholder="My pet is xx years old..." type="number" name="age" id="age" class="form-control" value="<?php echo $age ?>" required maxlength="2" min="0" max="99" >
                     </div>
 
                     <div class="form-group">
-                        <label for="gender"> Gender (F/M) </label>
-                        <input type="text" name="gender" id="gender" class="form-control" value="<?php echo $gender ?>">
+                        <label for="name"> Gender </label>
+                        <select  type="text" name="gender" id="gender" class="form-control">
+                            <option value="<?php echo $gender ?? 'none'?>">
+                                <?php
+                                if ($gender === 'F')
+                                    echo 'Female';
+
+                                else if ($gender === 'M')
+                                echo 'Male';
+
+                                else
+                                    echo $gender ?? 'Please Choose One';
+                                ?> </option>
+                            <option value="F">Female</option>
+                            <option value="M">Male</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
                         <label for="colour"> Colour </label>
-                        <input type="text" name="colour" id="colour" class="form-control" value="<?php echo $colour ?>">
+                        <input placeholder="My pet's primary colour is..." type="text" name="colour" id="colour" class="form-control" value="<?php echo $colour ?>" required maxlength="10" minlength="2">
                     </div>
 
                     <div style="text-align:center;">

@@ -1,69 +1,82 @@
 <?php require('header.php'); ?>
     <?php
 
+    error_reporting(0);
     ob_start();
 
-    //Assigning variables from the input form.
-    $name = filter_input(INPUT_POST, 'name');
-    $type = filter_input(INPUT_POST, 'type');
-    $age = filter_input(INPUT_POST, 'age', FILTER_VALIDATE_INT);
-    $gender = filter_input(INPUT_POST, 'gender');
-    $colour = filter_input(INPUT_POST, 'colour');
+    //Assigning variables from the input form. We also sanitize them.
+    $name = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+    $type = filter_input(INPUT_POST, 'type', FILTER_SANITIZE_STRING);
+    $age = filter_input(INPUT_POST, 'age', FILTER_SANITIZE_NUMBER_INT);
+    $gender = filter_input(INPUT_POST, 'gender', FILTER_SANITIZE_STRING);
+    $colour = filter_input(INPUT_POST, 'colour', FILTER_SANITIZE_STRING);
+    $id = null;
+    $id = filter_input(INPUT_POST, 'pet_id');
 
 
-    //Making the strings look nice by making 1st letter uppercase. For this we first make the whole string a lowercase, and then make it upper.
+    //Normalization
     $name = ucfirst(strtolower($name));
-    $type = ucfirst(strtolower($type));
     $gender = ucfirst(strtolower($gender));
     $colour = ucfirst(strtolower($colour));
 
-
-    //iniaitalize the ID
-    $id = null;
-    $id = filter_input(INPUT_POST, 'pet_id'); 
-
     //Set up a flag variable for debugging.
     $ok = true;
+    $errors = [];
 
-    if (!(strlen($name) > 1) || !(strlen($type) > 1) || !(strlen($colour) > 1))
+    // Validate the recaptcha
+    if (!empty($_POST['recaptcha_response']))
     {
-        // This is the error message if the name, type, or colour of the animal is only 1 letter or less.
-        echo "<div class='divider'></div>";
-        echo "<section class='main-form-view'>";
-        echo "<div>";
-        echo "<h5 style='color: #af4644';> Please make sure the name, type, and colour are all at least 2 characters in length. </h5>";
-        echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="index.php" class="btn btn-outline-primary"> Back to Home </a>';
-        echo "<div class='divider'></div>";
-        echo "</div>";
-        echo "</section>";
+        $secret = SECRETKEY;
+        $verify_response = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$secret}&response={$_POST['recaptcha_response']}");
+
+        $response_data = json_decode($verify_response);
+        if (!$response_data -> success)
+        {
+            $errors[] = "Google reCaptcha failed: " . ($response_data->{'error-codes'})[0];
+            $ok = false;
+        }
+    }
+
+    //Server side validation for name.
+    if (!(strlen($name) >= 2 && strlen($name) <= 25))
+    {
+        array_push($errors, "Please make sure the name is between 2 and 25 characters in length.");
         $ok = false;
     }
 
-    else if ($age === false)
+    //Server side validation for type.
+    if (!(strlen($type) >= 2 && strlen($type) <= 25))
+    {
+        array_push($errors, "Please make sure the type is between 2 and 25 characters in length.");
+        $ok = false;
+    }
+
+    if ($type === "None")
+    {
+        array_push($errors, "Please select a pet type from the selection given.");
+        $ok = false;
+    }
+
+    //Server side validation for the age.
+    if (!($age >= 0 && age <= 99))
     {
         // This is the error message if the age is not an int.
-        echo "<div class='divider'></div>";
-        echo "<section class='main-form-view'>";
-        echo "<div>";
-        echo "<h5 style='color: #af4644';> Please enter the pet's age as a number. </h5>";
-        echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="index.php" class="btn btn-outline-primary"> Back to Home </a>';
-        echo "<div class='divider'></div>";
-        echo "</div>";
-        echo "</section>";
+        array_push($errors, "Please enter the pet's age as a numeric value that is between 0 and 99.");
         $ok = false;
     }
 
-    else if ($gender != 'M' && $gender != 'F')
+    //Server side validation for gender.
+    if ($gender != 'M' && $gender != 'F')
     {
         // This is the error message if the gender is not M or F.
-        echo "<div class='divider'></div>";
-        echo "<section class='main-form-view'>";
-        echo "<div>";
-        echo "<h5 style='color: #af4644';> Please make sure the gender is either male (M) or female (F). </h5>";
-        echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="index.php" class="btn btn-outline-primary"> Back to Home </a>';
-        echo "<div class='divider'></div>";
-        echo "</div>";
-        echo "</section>";
+        array_push($errors, "Please make sure the gender is either male (M) or female (F).");
+        $ok = false;
+    }
+
+    //Server side validation for colour.
+    if (!(strlen($colour) >= 2 && strlen($type) <= 25))
+    {
+        array_push($errors, "Please make sure the colour is between 2 and 25 characters in length.");
         $ok = false;
     }
 
@@ -126,6 +139,25 @@
         {
             header('location:error.php'); 
         }
+    }
+
+    else
+    {
+        // This is the error message if the gender is not M or F.
+        echo "<div class='divider'></div>";
+        echo "<section class='main-form-view'>";
+        echo "<div>";
+        if (count($errors) > 0)
+        {
+            foreach ($errors as $error)
+            {
+                echo "<h5 style='color: #af4644';>{$error}</h5>";
+            }
+        }
+        echo '<a style="font-size: 20px; width: 20%; margin: auto;" href="index.php" class="btn btn-outline-primary"> Back to Home </a>';
+        echo "<div class='divider'></div>";
+        echo "</div>";
+        echo "</section>";
     }
 
     ob_flush();
