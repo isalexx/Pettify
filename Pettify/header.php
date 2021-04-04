@@ -26,6 +26,9 @@
                         <li class="nav-item">
                             <a style="font-size: 25px;" class="nav-link active" aria-current="page" href="view.php">View Pets</a>
                         </li>
+                        <li class="nav-item">
+                            <a style="font-size: 25px; margin-left: 500px" class="nav-link active" aria-current="page" href="account.php">Account</a>
+                        </li>
                     </ul>
                 </div>
             </div>

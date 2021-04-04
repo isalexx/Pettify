@@ -10,7 +10,7 @@ require('header.php'); ?>
         <form action="search.php" method="get">
             <div class="row">
                 <div class="col">
-                    <input style="width: 50%; margin: auto;" type="text" name="search" placeholder="I'm looking for an animal named..." class="form-control">
+                    <input style="width: 50%; margin: auto;" type="text" name="search" placeholder="I'm looking for an animal named..." class="form-control" required>
                 </div>
             </div>
             <p></p>
