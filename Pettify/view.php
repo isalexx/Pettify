@@ -1,4 +1,16 @@
-<?php require('header.php'); ?>
+<?php require('header.php');
+
+// If they're not logged in, redirect them
+session_start();
+if (!$_SESSION['user'])
+{
+    header("Location: login.php");
+    exit();
+}
+
+// Assign the user
+$user = $_SESSION['user'];
+?>
 
     <div class="divider"></div>
     <section class="image">
@@ -14,7 +26,7 @@
         <form action="search.php" method="get">
             <div class="row">
                 <div class="col">
-                    <input style="width: 50%; margin: auto;" type="text" name="search" placeholder="I'm looking for an animal named..." class="form-control">
+                    <input style="width: 50%; margin: auto;" type="text" name="search" placeholder="I'm looking for an animal named..." class="form-control" required>
                 </div>
             </div>
             <p></p>

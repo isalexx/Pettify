@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=Lato');
 
 body
 {
@@ -45,7 +46,7 @@ h5
     flex-direction: column;
     flex-wrap: wrap;
     height: 600px;
-    background-color: #343A40;
+    background-color: #212529;
     margin: auto;
     font-size: 25px;
     border-radius: 25px;
@@ -67,7 +68,7 @@ h5
     flex-direction: column;
     flex-wrap: wrap;
     height: auto;
-    background-color: #343A40;
+    background-color: #212529;
     margin: auto;
     font-size: 25px;
     border-radius: 25px;
@@ -104,7 +105,7 @@ footer > section
     height: 250px;
     font-size: 40px;
     color:  #e2e2e2;
-    background-color: #343A40;
+    background-color: #212529;
     margin: auto;
     border: solid 2px #16181a;
 }
@@ -158,4 +159,7 @@ footer > section > article:nth-child(2) > p:nth-child(3)
     margin-top: -10px;
     color: rgba(255, 255, 255, 0.3);
 }
+
+
+
    
