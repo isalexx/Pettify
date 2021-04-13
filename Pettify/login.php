@@ -30,12 +30,12 @@ if ($_SESSION['user'])
 
                 <div class="form-group" style="padding-top: 20px">
                     <label for="exampleInputEmail1">Email address</label>
-                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" minlength="2" maxlength="35">
+                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required minlength="2" maxlength="35">
                 </div>
 
                 <div class="form-group" style="padding-top: 20px">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" minlength="2" maxlength="100">
+                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required minlength="2" maxlength="100">
                 </div>
 
                 <!--                ReCaptcha field.-->

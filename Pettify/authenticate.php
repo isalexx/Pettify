@@ -95,7 +95,8 @@ if ($ok === true)
         array_push($errors, "Your email or password is incorrect.");
         $_SESSION['form_values'] = $_POST;
 
-        $_SESSION['user'] = $user;
+        
+        unset($_SESSION['user']);
     }
 }
 
